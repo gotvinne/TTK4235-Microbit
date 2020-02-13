@@ -17,7 +17,7 @@ int current_floor = 0;
  *
  * @return Returns 0..3 (success), -1 (failure)
  */
-int elevator_state_machine_floor_peaks();
+int esm_floor_peaks();
 
 
 /**
@@ -29,4 +29,4 @@ int elevator_state_machine_floor_peaks();
  * @warning Uses the hardware functions ...
  * @return Returns an int 0..3 (success), or -1 (failure)
  */
-int elevator_state_machine_calculate_current_floor(int peak);
+int esm_calculate_current_floor(int peak);

@@ -191,3 +191,38 @@ void hardware_command_order_light(int floor, HardwareOrder order_type, int on){
         io_clear_bit(light_bit_lookup[floor][type_bit]);
     }
 }
+
+
+void hardware_command_go_to(int* p_queue){
+        int floor = elevator_state_maschine_current_floor();
+        HardwareMovement movement = HARDWARE_MOVEMENT_STOP;
+        if (floor < *p_queue){
+                movement = HARDWARE_MOVEMENT_UP;
+        }
+        else{
+                movement = HARDWARE_MOVEMENT_DOWN;
+        }
+        while(floor != *p_queue){
+                hardware_command_movement(movement);
+        }
+        hardware_command_movement(HARDWARE_MOVEMENT_STOP);
+}
+
+int hardware_command_open_door(){
+        if(SENSOR_FLOOR1 || SENSOR_FLOOR2 || SENSOR_FLOOR3 || SENSOR_FLOOR4){
+                hardware_command_door_open(1);
+                sleep(3);
+                hardware_command_door_open(0);
+                return 0;
+        }
+        return -1;
+}
+
+
+void hardware_command_stop_button_pressed_actions(){
+        hardware_command_movement(HARDWARE_COMMAND_STOP);
+	hardware_command_stop_light(1):
+        hardware_command_open_door();
+}
+
+

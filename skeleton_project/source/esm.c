@@ -5,7 +5,7 @@
 
 #include <stdlib.h>
 
-int elevator_state_machine_floor_peaks(){
+int esm_floor_peaks(){
 	int readed_floor = -1;
 	//Itererer over alle etasjesensorene
 	for(int i = 0; i < 4; i++){
@@ -16,7 +16,7 @@ int elevator_state_machine_floor_peaks(){
 	return readed_floor;
 }
 
-int elevator_state_machine_calculate_current_floor(int peak){
+int esm_calculate_current_floor(int peak){
 	switch(peak){
 		case -1:
 			return current_floor;
