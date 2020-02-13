@@ -143,5 +143,11 @@ int hardware_command_open_door();
  */
 void hardware_command_stop_button_pressed_actions();
 
+/**
+ * @brief Turn off all order ligths.
+ */
+static void clear_all_order_lights();
+
+
 
 #endif
