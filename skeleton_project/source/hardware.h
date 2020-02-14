@@ -11,7 +11,6 @@
 #define HARDWARE_H
 #define HARDWARE_NUMBER_OF_FLOORS 4
 
-int current_floor = 0;
 
 /**
  * @brief Movement type used in @c hardware_command_movement.
