@@ -3,50 +3,50 @@
 
 
 int main(){
-	eElevatorState eNextState = Calibrating;
+	e_elevator_state e_next_state = calibrating;
 	int in_floor = 0; //Bare en midlertidig variabel skal si om heisen er posisjonert en definert etasje eller ikkje.
-	eElevatorEvent ReadEvents[6] = {Stop_Button_Pressed, Read_New_Order, Floor_Arrived, Read_New_Order, Floor_Arrived, Stop_Button_Pressed};
-	eElevatorEvent ReadEvent = Stop_Button_Pressed;
+	e_elevator_event read_events[6] = {stop_button_pressed, read_new_order, floor_arrived, read_new_order, floor_arrived, stop_button_pressed};
+	e_elevator_event read_event = stop_button_pressed;
 
 	int runs = 0;
 	while(runs != 6){
 		printf("Run %d\n",runs);
-		eElevatorEvent eNewEvent = ReadEvents[runs];
-		switch(eNextState){
-			case Calibrating:
+		e_elevator_event e_new_event = read_events[runs];
+		switch(e_next_state){
+			case calibrating:
 				{
 					printf("Calibrating...\n");
-					eNextState = Moving;
+					e_next_state = moving;
 					break;
 				}
-			case  Moving:
+			case  moving:
 				{
 					printf("Moving...\n");
-					if(eNewEvent == Stop_Button_Pressed){
+					if(e_new_event == stop_button_pressed){
 						printf("Stop_Button_Pressed.\n");
-						eNextState = Stopped_Door_Closed;
+						e_next_state = stopped_door_closed;
 						break;	
 					}
-					if(eNewEvent == Floor_Arrived){
+					if(e_new_event == floor_arrived){
 						printf("You arrived your destination.\n");
 						printf("Should delete order from queue.\n");
-						eNextState = Stopped_Door_Closed;
+						e_next_state = stopped_door_closed;
 						break;
 					}
-					if(eNewEvent == Read_New_Order){
+					if(e_new_event == read_new_order){
 						printf("Read_New_Order.\n");
 						break;
 					}
 					break;
 				}
-			case Stopped_Door_Closed:
+			case stopped_door_closed:
 				{
 					printf("Stopped_Door_Closed...\n");
-					if(eNewEvent == Stop_Button_Pressed){
+					if(e_new_event == stop_button_pressed){
 						//Should be in a loop while the stop button is pressed
                                                 printf("Stop light on.\n");
                                                 if(in_floor){
-							eNextState = Stopped_Door_Open;
+							e_next_state = stopped_door_open;
 							break;
                                                 }
                                                 else{
@@ -54,27 +54,27 @@ int main(){
                                                		break;
 					       	}
 					}
-					if(eNewEvent == Floor_Arrived){
+					if(e_new_event == floor_arrived){
 						printf("Floor_Arrived.\n");
-						eNextState = Stopped_Door_Open;
+						e_next_state = stopped_door_open;
 						break;
 					}
-					if(eNewEvent == Read_New_Order){
+					if(e_new_event == read_new_order){
 						printf("Read_Floor_Order.\n");
-						eNextState = Moving;
+						e_next_state = moving;
 						break;
 					}
 					break;
 				}
-			case Stopped_Door_Open:
+			case stopped_door_open:
 				{
 					printf("Stopped_Door_Open...\n");
-					while(eNewEvent == Stop_Button_Pressed){
+					while(e_new_event == stop_button_pressed){
 						printf("Stop light on.\n");
 						printf("Door open.\n");
 					}
 					printf("Door open in 3 sec.\n");
-					eNextState = Stopped_Door_Closed;
+					e_next_state = stopped_door_closed;
 					break;
 				}
 

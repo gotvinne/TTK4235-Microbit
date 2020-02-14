@@ -1,15 +1,17 @@
 #include <stdio.h>
 
 typedef enum{
-	Calibrating,
-	Moving,
-	Stopped_Door_Closed,
-	Stopped_Door_Open
-}eElevatorState;
+	calibrating,
+	moving,
+	stopped_door_closed,
+	stopped_door_open
+}e_elevator_state;
 
 
 typedef enum{
-	Stop_Button_Pressed,
-	Floor_Arrived,
-	Read_New_Order
-}eElevatorEvent;
+	stop_button_pressed,
+	floor_arrived,
+	read_new_order,
+	obstruction_button_pressed,
+	calibrating_finished,
+}e_elevator_event;
