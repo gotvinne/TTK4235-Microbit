@@ -11,6 +11,8 @@
 #define HARDWARE_H
 #define HARDWARE_NUMBER_OF_FLOORS 4
 
+int current_floor = 0;
+
 /**
  * @brief Movement type used in @c hardware_command_movement.
  */
@@ -128,6 +130,7 @@ void hardware_command_order_light(int floor, HardwareOrder order_type, int on);
  * @param p_queue An int pointer to the next floor the elevator should be in.
  * @warning Its position is calculated by elevator_state_machine_current_floor()
  * in elevator_state_machine.h
+ * 
  */
 void hardware_command_go_to(int* p_queue);
 
@@ -145,9 +148,8 @@ void hardware_command_stop_button_pressed_actions();
 
 /**
  * @brief Turn off all order ligths.
- */
+ *
 static void clear_all_order_lights();
-
-
+*/
 
 #endif

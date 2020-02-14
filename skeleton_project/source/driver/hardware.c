@@ -2,6 +2,7 @@
 #include "channels.h"
 #include "io.h"
 
+#include <unistd.h>
 #include <stdlib.h>
 
 static int hardware_legal_floor(int floor, HardwareOrder order_type){
@@ -194,15 +195,14 @@ void hardware_command_order_light(int floor, HardwareOrder order_type, int on){
 
 
 void hardware_command_go_to(int* p_queue){
-        int floor = elevator_state_maschine_current_floor();
         HardwareMovement movement = HARDWARE_MOVEMENT_STOP;
-        if (floor < *p_queue){
+        if (current_floor < *p_queue){
                 movement = HARDWARE_MOVEMENT_UP;
         }
         else{
                 movement = HARDWARE_MOVEMENT_DOWN;
         }
-        while(floor != *p_queue){
+        while(current_floor != *p_queue){
                 hardware_command_movement(movement);
         }
         hardware_command_movement(HARDWARE_MOVEMENT_STOP);
@@ -220,11 +220,12 @@ int hardware_command_open_door(){
 
 
 void hardware_command_stop_button_pressed_actions(){
-        hardware_command_movement(HARDWARE_COMMAND_STOP);
-	hardware_command_stop_light(1):
+        hardware_command_movement(HARDWARE_MOVEMENT_STOP);
+	hardware_command_stop_light(1);
         hardware_command_open_door();
 }
 
+/**
 static void clear_all_order_lights(){
     HardwareOrder order_types[3] = {
         HARDWARE_ORDER_UP,
@@ -239,4 +240,4 @@ static void clear_all_order_lights(){
         }
     }
 }
-
+*/
