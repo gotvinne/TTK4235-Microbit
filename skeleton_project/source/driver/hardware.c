@@ -1,5 +1,6 @@
 #include "hardware.h"
 #include "channels.h"
+#include "esm.h"
 #include "io.h"
 
 #include <unistd.h>
