@@ -58,9 +58,11 @@ int \hyperlink{hardware_8h_a1b36270f06eccd9d0df1714b22f5bf35}{hardware\+\_\+comm
 \mbox{\Hypertarget{hardware_8h_a6fc9a1afee9057e5523cfed7bdbd5901}\label{hardware_8h_a6fc9a1afee9057e5523cfed7bdbd5901}} 
 void \hyperlink{hardware_8h_a6fc9a1afee9057e5523cfed7bdbd5901}{hardware\+\_\+command\+\_\+stop\+\_\+button\+\_\+pressed\+\_\+actions} ()
 \begin{DoxyCompactList}\small\item\em Makes the elevator stop when the stop button is pressed. Tries to open door if in defined floor. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{hardware_8h_afd77151474c3e94d7c52fd75413ae3ca}\label{hardware_8h_afd77151474c3e94d7c52fd75413ae3ca}} 
-void \hyperlink{hardware_8h_afd77151474c3e94d7c52fd75413ae3ca}{clear\+\_\+all\+\_\+order\+\_\+lights} ()
-\begin{DoxyCompactList}\small\item\em Turn off all order ligths. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\mbox{\Hypertarget{hardware_8h_a74372f970052747682a8ef1d3da07b8c}\label{hardware_8h_a74372f970052747682a8ef1d3da07b8c}} 
+void \hyperlink{hardware_8h_a74372f970052747682a8ef1d3da07b8c}{hardware\+\_\+clear\+\_\+all\+\_\+order\+\_\+lights} ()
+\begin{DoxyCompactList}\small\item\em Turn off all order ligths. \end{DoxyCompactList}\item 
+void \hyperlink{hardware_8h_ae1e1ad3dcbb48e424fb575d364f4f457}{hardware\+\_\+set\+\_\+all\+\_\+lights} (Order $\ast$p\+\_\+button\+\_\+queue, int size\+\_\+of\+\_\+p\+\_\+button\+\_\+queue)
+\begin{DoxyCompactList}\small\item\em Set all lights that should be on, depending on {\ttfamily current\+\_\+floor}, the button queue {\ttfamily p\+\_\+button\+\_\+queue} and the size of this queue {\ttfamily size\+\_\+of\+\_\+p\+\_\+button\+\_\+queue}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
@@ -261,3 +263,20 @@ Polls the hardware for the current stop signal.
 \begin{DoxyReturn}{Returns}
 1 if the stop signal is high; 0 if it is low. 
 \end{DoxyReturn}
+\mbox{\Hypertarget{hardware_8h_ae1e1ad3dcbb48e424fb575d364f4f457}\label{hardware_8h_ae1e1ad3dcbb48e424fb575d364f4f457}} 
+\index{hardware.\+h@{hardware.\+h}!hardware\+\_\+set\+\_\+all\+\_\+lights@{hardware\+\_\+set\+\_\+all\+\_\+lights}}
+\index{hardware\+\_\+set\+\_\+all\+\_\+lights@{hardware\+\_\+set\+\_\+all\+\_\+lights}!hardware.\+h@{hardware.\+h}}
+\subsubsection{\texorpdfstring{hardware\+\_\+set\+\_\+all\+\_\+lights()}{hardware\_set\_all\_lights()}}
+{\footnotesize\ttfamily void hardware\+\_\+set\+\_\+all\+\_\+lights (\begin{DoxyParamCaption}\item[{Order $\ast$}]{p\+\_\+button\+\_\+queue,  }\item[{int}]{size\+\_\+of\+\_\+p\+\_\+button\+\_\+queue }\end{DoxyParamCaption})}
+
+
+
+Set all lights that should be on, depending on {\ttfamily current\+\_\+floor}, the button queue {\ttfamily p\+\_\+button\+\_\+queue} and the size of this queue {\ttfamily size\+\_\+of\+\_\+p\+\_\+button\+\_\+queue}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+\_\+button\+\_\+queue} & A pointer to an {\ttfamily Order} struct \\
+\hline
+{\em size\+\_\+of\+\_\+p\+\_\+button\+\_\+queue} & An int representing the size of the p\+\_\+button\+\_\+queue array. \\
+\hline
+\end{DoxyParams}

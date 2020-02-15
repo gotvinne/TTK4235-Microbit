@@ -1,6 +1,6 @@
 /**
  * @file
- * @breif Positioning of the elevator
+ * @brief Positioning of the elevator
  *
  */
 

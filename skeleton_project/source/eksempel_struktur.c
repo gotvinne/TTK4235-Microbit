@@ -3,17 +3,17 @@
 #include <signal.h>
 #include "eksempel_struktur.h"
 #include "hardware.h"
+#include "user.h"
 
 int main(){
 	e_elevator_state e_next_state = calibrating;
 	int in_floor = 0; //Bare en midlertidig variabel skal si om heisen er posisjonert en definert etasje eller ikkje.
-	e_elevator_event read_events[6] = {stop_button_pressed, read_new_order, floor_arrived, read_new_order, floor_arrived, stop_button_pressed};
 	e_elevator_event read_event = stop_button_pressed;
 
 	int runs = 0;
 	while(runs != 6){
 		printf("Run %d\n",runs);
-		e_elevator_event e_new_event = read_events[runs];
+		e_elevator_event e_new_event = user_read_event();
 		switch(e_next_state){
 			case calibrating:
 				{
@@ -24,7 +24,7 @@ int main(){
 			case  moving:
 				{
 					printf("Moving...\n");
-					hardware_commad_set_elevator_movement(); //Her skal int peker til køen vere input
+					hardware_command_set_elevator_movement(); //Her skal int peker til køen vere input
 					if(e_new_event == stop_button_pressed){
 						printf("Stop_Button_Pressed.\n");
 						e_next_state = stopped_door_closed;

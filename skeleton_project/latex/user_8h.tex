@@ -1,0 +1,71 @@
+\hypertarget{user_8h}{}\section{source/user.h File Reference}
+\label{user_8h}\index{source/user.\+h@{source/user.\+h}}
+
+
+Organizing the user inputs.  
+
+
+This graph shows which files directly or indirectly include this file\+:
+% FIG 0
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{user_8h_af1ec5e4664e743df8ee7b0bd44634e6a}\label{user_8h_af1ec5e4664e743df8ee7b0bd44634e6a}} 
+enum \hyperlink{user_8h_af1ec5e4664e743df8ee7b0bd44634e6a}{e\+\_\+elevator\+\_\+event} \{ \newline
+{\bfseries stop\+\_\+button\+\_\+pressed}, 
+{\bfseries floor\+\_\+arrived}, 
+{\bfseries read\+\_\+new\+\_\+order}, 
+{\bfseries obstruction\+\_\+button\+\_\+pressed}, 
+\newline
+{\bfseries calibrating\+\_\+finished}, 
+{\bfseries stop\+\_\+button\+\_\+pressed}, 
+{\bfseries floor\+\_\+arrived}, 
+{\bfseries obstruction\+\_\+button\+\_\+pressed}, 
+\newline
+{\bfseries execute\+\_\+new\+\_\+order}, 
+{\bfseries calibrating\+\_\+finished}, 
+{\bfseries nothing}
+ \}\begin{DoxyCompactList}\small\item\em Events that can occure in the different states in {\ttfamily e\+\_\+elevator\+\_\+state}. \end{DoxyCompactList}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{user_8h_a412226c46885d24675575ed0dc02c28c}\label{user_8h_a412226c46885d24675575ed0dc02c28c}} 
+void {\bfseries set\+Order} ()
+\item 
+\hyperlink{eksempel__struktur_8h_af1ec5e4664e743df8ee7b0bd44634e6a}{e\+\_\+elevator\+\_\+event} \hyperlink{user_8h_ae2bc26a3d838feb5ab4e9d6bd6661838}{user\+\_\+read\+\_\+event} ()
+\begin{DoxyCompactList}\small\item\em Finding what signals the user are triggering. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{user_8h_a214e7aa4de64903f6b9aea5a829a1f38}\label{user_8h_a214e7aa4de64903f6b9aea5a829a1f38}} 
+int {\bfseries stop\+Button}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Organizing the user inputs. 
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{user_8h_ae2bc26a3d838feb5ab4e9d6bd6661838}\label{user_8h_ae2bc26a3d838feb5ab4e9d6bd6661838}} 
+\index{user.\+h@{user.\+h}!user\+\_\+read\+\_\+event@{user\+\_\+read\+\_\+event}}
+\index{user\+\_\+read\+\_\+event@{user\+\_\+read\+\_\+event}!user.\+h@{user.\+h}}
+\subsubsection{\texorpdfstring{user\+\_\+read\+\_\+event()}{user\_read\_event()}}
+{\footnotesize\ttfamily \hyperlink{eksempel__struktur_8h_af1ec5e4664e743df8ee7b0bd44634e6a}{e\+\_\+elevator\+\_\+event} user\+\_\+read\+\_\+event (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Finding what signals the user are triggering. 
+
+\begin{DoxyWarning}{Warning}
+It exists events that the user can not do himself, but this is calibrating conditions (don\textquotesingle{}t care) 
+\end{DoxyWarning}
+\begin{DoxyReturn}{Returns}
+Returns the event that the user is affecting the system with 
+\end{DoxyReturn}
+
+
+Definition at line 16 of file user.\+c.
+

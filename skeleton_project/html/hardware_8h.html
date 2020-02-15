@@ -145,10 +145,13 @@ Functions</h2></td></tr>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hardware_8h.html#a6fc9a1afee9057e5523cfed7bdbd5901">hardware_command_stop_button_pressed_actions</a> ()</td></tr>
 <tr class="memdesc:a6fc9a1afee9057e5523cfed7bdbd5901"><td class="mdescLeft">&#160;</td><td class="mdescRight">Makes the elevator stop when the stop button is pressed. Tries to open door if in defined floor. <br /></td></tr>
 <tr class="separator:a6fc9a1afee9057e5523cfed7bdbd5901"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afd77151474c3e94d7c52fd75413ae3ca"><td class="memItemLeft" align="right" valign="top"><a id="afd77151474c3e94d7c52fd75413ae3ca"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hardware_8h.html#afd77151474c3e94d7c52fd75413ae3ca">clear_all_order_lights</a> ()</td></tr>
-<tr class="memdesc:afd77151474c3e94d7c52fd75413ae3ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Turn off all order ligths. <br /></td></tr>
-<tr class="separator:afd77151474c3e94d7c52fd75413ae3ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74372f970052747682a8ef1d3da07b8c"><td class="memItemLeft" align="right" valign="top"><a id="a74372f970052747682a8ef1d3da07b8c"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hardware_8h.html#a74372f970052747682a8ef1d3da07b8c">hardware_clear_all_order_lights</a> ()</td></tr>
+<tr class="memdesc:a74372f970052747682a8ef1d3da07b8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Turn off all order ligths. <br /></td></tr>
+<tr class="separator:a74372f970052747682a8ef1d3da07b8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1e1ad3dcbb48e424fb575d364f4f457"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hardware_8h.html#ae1e1ad3dcbb48e424fb575d364f4f457">hardware_set_all_lights</a> (Order *p_button_queue, int size_of_p_button_queue)</td></tr>
+<tr class="memdesc:ae1e1ad3dcbb48e424fb575d364f4f457"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set all lights that should be on, depending on <code>current_floor</code>, the button queue <code>p_button_queue</code> and the size of this queue <code>size_of_p_button_queue</code>.  <a href="#ae1e1ad3dcbb48e424fb575d364f4f457">More...</a><br /></td></tr>
+<tr class="separator:ae1e1ad3dcbb48e424fb575d364f4f457"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Driver for the elevator hardware. </p>
@@ -323,7 +326,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hard
   </table>
   </dd>
 </dl>
-<dl class="section warning"><dt>Warning</dt><dd>Its position is calculated by esm_current_floor() in <a class="el" href="esm_8h.html">esm.h</a> </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>Its position is calculated by esm_current_floor() in <a class="el" href="esm_8h.html" title="Positioning of the elevator. ">esm.h</a> </dd></dl>
 
 </div>
 </div>
@@ -475,6 +478,43 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hard
 
 <p>Polls the hardware for the current stop signal. </p>
 <dl class="section return"><dt>Returns</dt><dd>1 if the stop signal is high; 0 if it is low. </dd></dl>
+
+</div>
+</div>
+<a id="ae1e1ad3dcbb48e424fb575d364f4f457"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae1e1ad3dcbb48e424fb575d364f4f457">&#9670;&nbsp;</a></span>hardware_set_all_lights()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void hardware_set_all_lights </td>
+          <td>(</td>
+          <td class="paramtype">Order *&#160;</td>
+          <td class="paramname"><em>p_button_queue</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>size_of_p_button_queue</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set all lights that should be on, depending on <code>current_floor</code>, the button queue <code>p_button_queue</code> and the size of this queue <code>size_of_p_button_queue</code>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p_button_queue</td><td>A pointer to an <code>Order</code> struct </td></tr>
+    <tr><td class="paramname">size_of_p_button_queue</td><td>An int representing the size of the p_button_queue array. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

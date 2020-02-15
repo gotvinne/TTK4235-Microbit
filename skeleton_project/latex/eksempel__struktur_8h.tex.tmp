@@ -24,7 +24,14 @@ enum \hyperlink{eksempel__struktur_8h_af1ec5e4664e743df8ee7b0bd44634e6a}{e\+\_\+
 {\bfseries read\+\_\+new\+\_\+order}, 
 {\bfseries obstruction\+\_\+button\+\_\+pressed}, 
 \newline
-{\bfseries calibrating\+\_\+finished}
+{\bfseries calibrating\+\_\+finished}, 
+{\bfseries stop\+\_\+button\+\_\+pressed}, 
+{\bfseries floor\+\_\+arrived}, 
+{\bfseries obstruction\+\_\+button\+\_\+pressed}, 
+\newline
+{\bfseries execute\+\_\+new\+\_\+order}, 
+{\bfseries calibrating\+\_\+finished}, 
+{\bfseries nothing}
  \}\begin{DoxyCompactList}\small\item\em Events that can occure in the different states in {\ttfamily e\+\_\+elevator\+\_\+state}. \end{DoxyCompactList}
 \end{DoxyCompactItemize}
 

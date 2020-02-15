@@ -25,7 +25,7 @@ int main(){
     current_floor = esm_calculate_current_floor(esm_floor_peaks());
     int floors[4] = {0, 3, 1, 2};
     for(int i = 0; i < 4; i++){
-	   hardware_command_go_to(&floors[i]);
+	   hardware_command_set_elevator_movement(&floors[i]);
     }
     return 0;
 }
