@@ -1,0 +1,34 @@
+\hypertarget{eksempel__struktur_8h}{}\section{source/eksempel\+\_\+struktur.h File Reference}
+\label{eksempel__struktur_8h}\index{source/eksempel\+\_\+struktur.\+h@{source/eksempel\+\_\+struktur.\+h}}
+
+
+The different states and events that can occure in the finite state machine.  
+
+
+This graph shows which files directly or indirectly include this file\+:
+% FIG 0
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{eksempel__struktur_8h_a518a801af12e4396cb1dbfd5d638be1d}\label{eksempel__struktur_8h_a518a801af12e4396cb1dbfd5d638be1d}} 
+enum \hyperlink{eksempel__struktur_8h_a518a801af12e4396cb1dbfd5d638be1d}{e\+\_\+elevator\+\_\+state} \{ {\bfseries calibrating}, 
+{\bfseries moving}, 
+{\bfseries stopped\+\_\+door\+\_\+closed}, 
+{\bfseries stopped\+\_\+door\+\_\+open}
+ \}\begin{DoxyCompactList}\small\item\em Elevator state used in the switch in main. \end{DoxyCompactList}
+\item 
+\mbox{\Hypertarget{eksempel__struktur_8h_af1ec5e4664e743df8ee7b0bd44634e6a}\label{eksempel__struktur_8h_af1ec5e4664e743df8ee7b0bd44634e6a}} 
+enum \hyperlink{eksempel__struktur_8h_af1ec5e4664e743df8ee7b0bd44634e6a}{e\+\_\+elevator\+\_\+event} \{ \newline
+{\bfseries stop\+\_\+button\+\_\+pressed}, 
+{\bfseries floor\+\_\+arrived}, 
+{\bfseries read\+\_\+new\+\_\+order}, 
+{\bfseries obstruction\+\_\+button\+\_\+pressed}, 
+\newline
+{\bfseries calibrating\+\_\+finished}
+ \}\begin{DoxyCompactList}\small\item\em Events that can occure in the different states in {\ttfamily e\+\_\+elevator\+\_\+state}. \end{DoxyCompactList}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The different states and events that can occure in the finite state machine. 
+
