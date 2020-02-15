@@ -146,8 +146,17 @@ int hardware_command_open_door();
 void hardware_command_stop_button_pressed_actions();
 
 /**
- * @brief Turn off all order ligths.
+ * @brief Turn off all order ligths. 
  */
-void clear_all_order_lights();
+void hardware_clear_all_order_lights();
+
+/**
+ * @brief Set all lights that should be on, depending on @p current_floor,
+ * the button queue @p p_button_queue and the size of this queue @p size_of_p_button_queue
+ * 
+ * @param p_button_queue A pointer to an @p Order struct
+ * @param size_of_p_button_queue An int representing the size of the p_button_queue array.
+*/
+void hardware_set_all_lights(Order* p_button_queue, int size_of_p_button_queue);
 
 #endif

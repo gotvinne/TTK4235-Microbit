@@ -226,7 +226,7 @@ void hardware_command_stop_button_pressed_actions(){
 }
 
 
-void clear_all_order_lights(){
+void hardware_clear_all_order_lights(){
     HardwareOrder order_types[3] = {
         HARDWARE_ORDER_UP,
         HARDWARE_ORDER_INSIDE,
@@ -239,5 +239,30 @@ void clear_all_order_lights(){
             hardware_command_order_light(f, type, 0);
         }
     }
+}
+
+void hardware_set_all_lights(Order* p_button_queue, int size_of_p_button_queue){
+
+	HardwareOrder order_types[3] = {
+	        HARDWARE_ORDER_UP,
+	        HARDWARE_ORDER_INSIDE,
+	        HARDWARE_ORDER_DOWN
+	};
+	
+	for(j = 0; j < size_of_p_button_queue; j++){
+		for(int f = 0; f < HARDWARE_NUMBER_OF_FLOORS; f++){
+	        	for(int i = 0; i < 3; i++){
+	        		HardwareOrder type = order_types[i];
+				if(p_button_queue->order_type == type && p_button_queue->floor == f){
+	        			hardware_command_order_light(f, type, 1);
+				}
+				else{
+					hardware_command_order_light(f, type, 0);
+				}
+	        	}
+		}
+		p_button_queue++;
+	}
+	hardware_command_floor_indicator_on(current_floor);
 }
 
