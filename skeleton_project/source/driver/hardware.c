@@ -194,7 +194,7 @@ void hardware_command_order_light(int floor, HardwareOrder order_type, int on){
 }
 
 
-void hardware_command_go_to(int* p_queue){
+void hardware_command_set_elevator_movement(int* p_queue){
         HardwareMovement movement = HARDWARE_MOVEMENT_STOP;
         if (current_floor < *p_queue){
                 movement = HARDWARE_MOVEMENT_UP;
@@ -202,10 +202,10 @@ void hardware_command_go_to(int* p_queue){
         else{
                 movement = HARDWARE_MOVEMENT_DOWN;
         }
-        while(current_floor != *p_queue){
-                hardware_command_movement(movement);
-        }
-        hardware_command_movement(HARDWARE_MOVEMENT_STOP);
+	if (current_floor == *p_queue){
+		movement = HARDWARE_MOVEMENT_STOP;
+	}
+        hardware_command_movement(movement);
 }
 
 int hardware_command_open_door(){
@@ -225,8 +225,8 @@ void hardware_command_stop_button_pressed_actions(){
         hardware_command_open_door();
 }
 
-/**
-static void clear_all_order_lights(){
+
+void clear_all_order_lights(){
     HardwareOrder order_types[3] = {
         HARDWARE_ORDER_UP,
         HARDWARE_ORDER_INSIDE,
@@ -240,4 +240,4 @@ static void clear_all_order_lights(){
         }
     }
 }
-*/
+

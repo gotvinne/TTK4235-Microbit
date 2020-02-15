@@ -1,6 +1,8 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <signal.h>
 #include "eksempel_struktur.h"
-
+#include "hardware.h"
 
 int main(){
 	e_elevator_state e_next_state = calibrating;
@@ -22,6 +24,7 @@ int main(){
 			case  moving:
 				{
 					printf("Moving...\n");
+					hardware_commad_set_elevator_movement(); //Her skal int peker til køen vere input
 					if(e_new_event == stop_button_pressed){
 						printf("Stop_Button_Pressed.\n");
 						e_next_state = stopped_door_closed;
@@ -43,16 +46,19 @@ int main(){
 				{
 					printf("Stopped_Door_Closed...\n");
 					if(e_new_event == stop_button_pressed){
-						//Should be in a loop while the stop button is pressed
-                                                printf("Stop light on.\n");
-                                                if(in_floor){
-							e_next_state = stopped_door_open;
-							break;
-                                                }
-                                                else{
-                                                        printf("Doors are still closed. Not in a defined floor.\n");
-                                               		break;
-					       	}
+						while(stop_button_pressed){
+							printf("Stop light on.\n");
+							queue_clear_all_orders(); //Skal slette begge køene med bestillinger og destinasjoner
+                                                	if(in_floor){
+								e_next_state = stopped_door_open;
+								break;
+                                                	}
+                                                	else{
+                                                	        printf("Doors are still closed. Not in a defined floor.\n");
+                                               			break;
+					       		}
+						}
+						break;
 					}
 					if(e_new_event == floor_arrived){
 						printf("Floor_Arrived.\n");

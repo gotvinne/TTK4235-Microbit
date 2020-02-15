@@ -124,14 +124,14 @@ void hardware_command_stop_light(int on);
 void hardware_command_order_light(int floor, HardwareOrder order_type, int on);
 
 /**
- * @brief Moves the elevator to the next floor in the queue @p p_queue given its position
+ * @brief Sets the requiered movement to the elevator to reach the next floor in the queue @p p_queue given its position
  *
  * @param p_queue An int pointer to the next floor the elevator should be in.
- * @warning Its position is calculated by elevator_state_machine_current_floor()
- * in elevator_state_machine.h
+ * @warning Its position is calculated by esm_current_floor()
+ * in esm.h
  * 
  */
-void hardware_command_go_to(int* p_queue);
+void hardware_command_set_elevator_movement(int* p_queue);
 
 /**
  * @brief Open the door in three seconds if in defined floor.
@@ -147,8 +147,7 @@ void hardware_command_stop_button_pressed_actions();
 
 /**
  * @brief Turn off all order ligths.
- *
-static void clear_all_order_lights();
-*/
+ */
+void clear_all_order_lights();
 
 #endif
