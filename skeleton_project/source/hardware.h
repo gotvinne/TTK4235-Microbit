@@ -137,7 +137,7 @@ void hardware_command_set_elevator_movement(int* p_queue);
  * @brief Open the door in three seconds if in defined floor.
  * @return Returns 0 if it opens. -1 if the door did not open.
  */
-int hardware_command_open_door();
+int hardware_command_door_open_3_sec();
 
 /**
  * @brief Makes the elevator stop when the stop button is pressed.

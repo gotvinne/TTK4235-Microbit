@@ -36,10 +36,14 @@ int main(){
 						e_next_state = stopped_door_closed;
 						break;
 					}
-					if(e_new_event == read_new_order){
-						printf("Read_New_Order.\n");
+					if(e_new_event == execute_new_order){
+						printf("Motor still driving.\n");
 						break;
 					}
+					if(e_new_event == nothing){
+						printf("Nothing to be done.\n");
+						e_next_state = stopped_door_closed;
+						break;
 					break;
 				}
 			case stopped_door_closed:
@@ -49,7 +53,7 @@ int main(){
 						while(stop_button_pressed){
 							printf("Stop light on.\n");
 							queue_clear_all_orders(); //Skal slette begge køene med bestillinger og destinasjoner
-                                                	if(in_floor){
+                                                	if(esm_floor_peaks() != -1){//if in defined floor
 								e_next_state = stopped_door_open;
 								break;
                                                 	}
@@ -78,8 +82,10 @@ int main(){
 					while(e_new_event == stop_button_pressed){
 						printf("Stop light on.\n");
 						printf("Door open.\n");
+						hardware_command_door_open(1);
 					}
 					printf("Door open in 3 sec.\n");
+					hardware_command_door_open_3sec();
 					e_next_state = stopped_door_closed;
 					break;
 				}

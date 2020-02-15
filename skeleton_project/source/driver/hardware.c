@@ -209,7 +209,7 @@ void hardware_command_set_elevator_movement(int* p_queue){
         hardware_command_movement(movement);
 }
 
-int hardware_command_open_door(){
+int hardware_command_door_open_3sec(){
         if(SENSOR_FLOOR1 || SENSOR_FLOOR2 || SENSOR_FLOOR3 || SENSOR_FLOOR4){
                 hardware_command_door_open(1);
                 sleep(3);
