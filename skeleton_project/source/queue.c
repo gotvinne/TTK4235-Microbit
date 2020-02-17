@@ -25,7 +25,7 @@ int queue_floor_arrived(){
 
 
 int queue_execute_new_order(){
-    s = 0;
+    int s = 0;
     for(int i = 0, i < 4; i++){
         s += p_order_queue[i];
     }
