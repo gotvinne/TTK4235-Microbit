@@ -16,25 +16,6 @@ void attatch_order_to_queue(Order* new_o){
 
 }
 
-void queue_initialize_empty_button_queue(Order* b_q){
-        for(int i = 0; i < BUTTON_QUEUE_LENGTH; i++){
-		b_q->floor_destination = -1; //initialisering av etasje
-                b_q->order_type = HARDWARE_ORDER_UP; //Bare en default retning i initialiseringa
-        	b_q++;
-}
-
-
-void queue_add_button_order_from_user(Order user_order, Order* b_q){
-	for(int i = 0; i < BUTTON_QUEUE_LENGTH; i++){
-		if(b_q->floor_destination == -1){
-			b_q->floor_destination = user_order.floor_destination;
-			b_q->order_type = user_order.order_type;
-		}
-		else{
-			b_q++;
-		}
-}
-
 
 int queue_floor_arrived(){
         if(current_floor == p_order_queue[0]){
