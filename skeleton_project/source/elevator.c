@@ -5,19 +5,18 @@
 #include "hardware.h"
 #include "user.h"
 
-int main(){
+void run_elevator(){
 	e_elevator_state e_next_state = calibrating;
 	int in_floor = 0; //Bare en midlertidig variabel skal si om heisen er posisjonert en definert etasje eller ikkje.
 	e_elevator_event read_event = stop_button_pressed;
 
-	int runs = 0;
-	while(runs != 6){
-		printf("Run %d\n",runs);
+	while(1){
 		e_elevator_event e_new_event = user_read_event();
 		switch(e_next_state){
 			case calibrating:
 				{
 					printf("Calibrating...\n");
+					hardware_calibrate();	
 					e_next_state = moving;
 					break;
 				}
@@ -40,10 +39,6 @@ int main(){
 						printf("Motor still driving.\n");
 						break;
 					}
-					if(e_new_event == nothing){
-						printf("Nothing to be done.\n");
-						e_next_state = stopped_door_closed;
-						break;
 					break;
 				}
 			case stopped_door_closed:
@@ -91,7 +86,5 @@ int main(){
 				}
 
 		}
-		runs++;
 	}
-	return 0;
 }

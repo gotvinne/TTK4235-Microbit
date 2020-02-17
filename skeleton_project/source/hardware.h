@@ -159,4 +159,10 @@ void hardware_clear_all_order_lights();
 */
 void hardware_set_all_lights(Order* p_button_queue, int size_of_p_button_queue);
 
+/**
+ * @brief Initializes the hardware and io and makes the elevator go to the first floor.
+ */
+void hardware_calibrate();
+
+
 #endif

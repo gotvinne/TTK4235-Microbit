@@ -267,3 +267,14 @@ void hardware_set_all_lights(Order* p_button_queue, int size_of_p_button_queue){
 	hardware_command_floor_indicator_on(current_floor);
 }
 
+
+void hardware_calibrate(){
+        hardware_init();
+        int* first_floor;
+        *first_floor = 0;
+	while(current_floor != 0){
+        	hardware_command_set_elevator_movement(first_floor);
+	}
+}
+
+
