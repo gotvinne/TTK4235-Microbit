@@ -36,9 +36,8 @@ typedef enum{
         stop_button_pressed,
         floor_arrived,
         obstruction_button_pressed,
-    execute_new_order,
+	execute_new_order,
         calibrating_finished,
-    nothing
 }e_elevator_event;
 
 

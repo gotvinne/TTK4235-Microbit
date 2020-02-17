@@ -29,7 +29,21 @@ int buttom_queue_length = 0;
 void queue_delete_order();
 
 /**
- * @brief puts correct order into @p p_order_queue
+ * @brief Initializes the @p p_button_queue with 15 Order objects.
+ * @param[in] p_button_queue The dynamic array of pointers to orders.
+ *
+ * @warning All Order->floor_destinations is set to -1 and Order->order_type is set to HARDWARE_OREDER_UP
+ */
+void queue_initialize_empty_button_queue();
+
+/**
+ * @brief Attaches the order from the user to the p_button_queue
+ */
+void queue_add_button_order_from_user();
+
+
+/**
+ * @brief Puts correct order into @p p_order_queue
  */
 void initialise_order(); 
 
