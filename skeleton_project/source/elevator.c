@@ -7,8 +7,6 @@
 
 void run_elevator(){
 	e_elevator_state e_next_state = calibrating;
-	int in_floor = 0; //Bare en midlertidig variabel skal si om heisen er posisjonert en definert etasje eller ikkje.
-	e_elevator_event read_event = stop_button_pressed;
 
 	while(1){
 		e_elevator_event e_new_event = user_read_event();
@@ -17,7 +15,7 @@ void run_elevator(){
 				{
 					printf("Calibrating...\n");
 					hardware_calibrate();	
-					e_next_state = moving;
+					e_next_state = stopped_door_closed;
 					break;
 				}
 			case  moving:
@@ -37,6 +35,10 @@ void run_elevator(){
 					}
 					if(e_new_event == execute_new_order){
 						printf("Motor still driving.\n");
+						if(p_order_queue[0] == -1){//viss ein ikkje har fleire bestillingar
+							e_next_state = stopped_door_closed;
+							break;
+						}
 						break;
 					}
 					break;
@@ -45,26 +47,27 @@ void run_elevator(){
 				{
 					printf("Stopped_Door_Closed...\n");
 					if(e_new_event == stop_button_pressed){
-						while(stop_button_pressed){
-							printf("Stop light on.\n");
-							queue_clear_all_orders(); //Skal slette begge køene med bestillinger og destinasjoner
-                                                	if(esm_floor_peaks() != -1){//if in defined floor
-								e_next_state = stopped_door_open;
-								break;
-                                                	}
-                                                	else{
-                                                	        printf("Doors are still closed. Not in a defined floor.\n");
-                                               			break;
-					       		}
-						}
+						queue_clear_all_orders(); //Skal slette begge køene med bestillinger og destinasjoner
+						printf("Stop light on.\n");
+						hardware_command_stop_light(1);
+                                               	if(esm_floor_peaks() != -1){//if in defined floor
+							e_next_state = stopped_door_open;
+							break;
+                                               	}
+                                               	else{
+                                               	        printf("Doors are still closed. Not in a defined floor.\n");
+							while(hardware_read_stop_button()){}//holder alt på pause så lenge stopknapp er inne
+                                             		break;
+					       	}
+						hardware_command_stop_light(0);
 						break;
 					}
-					if(e_new_event == floor_arrived){
+					if(e_new_event == floor_arrived){//usikker på denne
 						printf("Floor_Arrived.\n");
 						e_next_state = stopped_door_open;
 						break;
 					}
-					if(e_new_event == read_new_order){
+					if(e_new_event == execute_new_order){
 						printf("Read_Floor_Order.\n");
 						e_next_state = moving;
 						break;
@@ -74,8 +77,9 @@ void run_elevator(){
 			case stopped_door_open:
 				{
 					printf("Stopped_Door_Open...\n");
-					while(e_new_event == stop_button_pressed){
+					while(hardware_read_stop_signal()){
 						printf("Stop light on.\n");
+						hardware_command_stop_light(1);
 						printf("Door open.\n");
 						hardware_command_door_open(1);
 					}

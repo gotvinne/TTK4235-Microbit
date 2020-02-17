@@ -11,7 +11,6 @@
 #define HARDWARE_H
 #define HARDWARE_NUMBER_OF_FLOORS 4
 
-
 /**
  * @brief Movement type used in @c hardware_command_movement.
  */

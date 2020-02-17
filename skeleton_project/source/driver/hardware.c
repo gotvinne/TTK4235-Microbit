@@ -2,6 +2,7 @@
 #include "channels.h"
 #include "esm.h"
 #include "io.h"
+#include "user.h"
 
 #include <unistd.h>
 #include <stdlib.h>
