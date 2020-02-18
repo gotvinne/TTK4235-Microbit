@@ -27,7 +27,7 @@ void queue_delete_order();
 /**
  * @brief Puts correct order into @p p_order_queue
  */
-void initialise_order(); 
+void initialise_order();//uenig i dette - Gunnar 
 
 /**
  * @brief deletes order from @p p_order_queue
@@ -68,4 +68,10 @@ void sort_order_queue();
  * @param[in] p_b_q A pointer to the global buttom queue (should be p_buttom_queue)
  */
 void queue_attach_order_to_button_queue(Order o, Order* p_b_q);
+
+/**
+ * @brief Removes the first order of the button queue
+ */
+void queue_remove_order_from_button_queue()
+
 #endif
