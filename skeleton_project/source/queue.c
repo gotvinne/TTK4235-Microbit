@@ -1,21 +1,6 @@
 #include "queue.h"
 #include "user.h"
 
-void attatch_order_to_queue(Order* new_o){//Ikkje enig i denne grunna .size() - Gunnar
-
-    for (unsigned int i = 0; i < p_order_queue.size(); i++){
-        
-        if (p_order_queue[i] == -1){
-            p_order_queue[i] = new_o->floor_destination; 
-            break; //usikker her
-        }
-    }
-    else{
-        printf("Order-queue is full");
-    }
-
-}
-
 
 int queue_size_of_button_queue(Order* b_q){
 	int size = 0;
@@ -32,6 +17,14 @@ void queue_initialize_empty_button_queue(Order* b_q){
 		b_q[i].floor_destination = -1;
 		b_q[i].order_type = HARDWARE_ORDER_INSIDE;
 	}
+}
+
+
+void queue_clear_all_orders(Order* b_q, int* o_q){
+	for (unsigned int i = 0; i < ORDER_QUEUE_LENGTH; i++){
+		o_q[i] = -1;
+	}
+	queue_initialize_empty_button_queue(b_q); 
 }
 
 
