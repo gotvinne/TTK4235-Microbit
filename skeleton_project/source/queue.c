@@ -1,7 +1,7 @@
 #include "queue.h"
 #include "user.h"
 
-void buttom_queue_init(){
+void queue_buttom_init(){
 	Order new_order;
 	make_order(-1,HARDWARE_ORDER_INSIDE,&new_order);
 
@@ -18,7 +18,7 @@ void queue_delete_order(unsigned int position){
 	order_queue[position].floor_destination = -1; 
 }
 
-void buttom_delete_order(){
+void queue_buttom_delete_order(){}
 
 
 void queue_clear_all_orders(){
@@ -27,10 +27,10 @@ void queue_clear_all_orders(){
 		queue_delete_order(i);
 	}
 	
-	
+	//Skal fikse queue_bottom_delete_order() her 
 }
 
-void attatch_order_to_queue(Order* new_o){
+void queue_attatch_order_buttom(Order* new_o){
 
     for (unsigned int i = 0; i < p_order_queue.size(); i++){
         
@@ -45,25 +45,6 @@ void attatch_order_to_queue(Order* new_o){
 
 }
 
-
-int queue_floor_arrived(){
-        if(current_floor == p_order_queue[0]){
-                return 1;
-        }
-        return 0;
-}
-
-
-int queue_execute_new_order(){
-    int s = 0;
-    for(int i = 0, i < 4; i++){
-        s += p_order_queue[i];
-    }
-    if(s==-4){
-        return 0;
-    }
-    return 1;
-}
 
 
 

@@ -18,7 +18,7 @@ typedef struct{
  * @param[in] ordertype, up, down and inside @p order_type
  * @param[in] order pointer @p new. 
  */
-Order make_order(int order_floor, HardwareOrder order_type);
+Order user_make_order(int order_floor, HardwareOrder order_type);
 
 /**
  * @brief add order struct into @p buttom_queue[]
@@ -26,7 +26,7 @@ Order make_order(int order_floor, HardwareOrder order_type);
  * 
  * @warning allocates a order pointer
  */
-void set_order(const Order new_order);
+void user_set_order(const Order new_order);
 
 /**
  * @brief Events that can occure in the different states in @c e_elevator_state

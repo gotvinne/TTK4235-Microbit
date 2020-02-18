@@ -3,7 +3,7 @@
 #include "queue.h" 
 
 
-Order make_order(int floor, HardwareOrder type){
+Order user_make_order(int floor, HardwareOrder type){
 	
 	Order new;
 	new.floor_destination = floor;
@@ -14,18 +14,15 @@ Order make_order(int floor, HardwareOrder type){
 	new_o->floor_destination = floor;
 	new_o->order_type = type;
 	*/
-}
+}//skal teste denne funksjonen. 
 
 
-void set_order(const Order new_order)
+void user_set_order(const Order new_order){
 	int i;
 	for (i=0; i < BUTTON_QUEUE_LENGTH; i++){
 	if (buttom_queue[i].floor_destination == -1){
 	buttom_queue[i] = new_o;
 	}
-
-
-
 }
  
 e_elevator_event user_read_event(){
