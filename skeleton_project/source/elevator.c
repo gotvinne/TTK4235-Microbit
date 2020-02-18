@@ -21,7 +21,7 @@ void run_elevator(){
 			case  moving:
 				{
 					printf("Moving...\n");
-					hardware_command_set_elevator_movement(); //Her skal int peker til køen vere input
+					hardware_command_set_elevator_movement(); //Her skal int peker til order_queue vere input
 					if(e_new_event == stop_button_pressed){
 						printf("Stop_Button_Pressed.\n");
 						e_next_state = stopped_door_closed;

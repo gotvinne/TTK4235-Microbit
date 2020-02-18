@@ -35,12 +35,9 @@ e_elevator_event user_read_event(){
         if(hardware_read_obstruction_signal()){
                 return obstruction_button_pressed;
         }
-        if(queue_execute_new_order()){
-                return execute_new_order;
-        }
         if(hardware_init() == 0){
                 return calibrating_finished;
         }
-        return nothing;
+        return execute_new_order;
 }
 
