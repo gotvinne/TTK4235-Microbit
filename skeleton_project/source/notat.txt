@@ -1,0 +1,9 @@
+
+Antar #define konstanter ikkje er static og kan hentast frå andre filer.
+
+Skal køen vere av pekere eller vanlige objekter?
+
+vi bruker return for å gå ut av funksjonskall.
+
+buttom_delete_order() skal berre slette den første orderen.
+queue_clear_all_orders() kan ikkje bruke buttom_queue_init() fordi den allokera minne.    
