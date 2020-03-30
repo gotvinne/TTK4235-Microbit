@@ -1,5 +1,5 @@
 # You only need to edit this line
-SOURCES := main.c button.c uart.c
+SOURCES := main.c uart.c twi.c accelerometer.c print.c
 
 # You can safely ignore everything south of this line if it intimidates you
 SOURCE_DIR := source
