@@ -1,6 +1,10 @@
 #include "hardware.h"
+
+#ifndef USER_H
+#define USER_H
+
 /**
- * @brief user impementation
+ * @brief impementation of the user module 
  * 
  */
 
@@ -13,37 +17,19 @@ typedef struct{
 } Order; 
 
 /**
- * @brief constructs Order struct
- * @param[in] order floor @p order_floor
- * @param[in] ordertype, up, down and inside @p order_type
- * @param[in] order pointer @p new. 
+ * @brief Constructs Order struct out of pulled buttons.
  */
-Order user_make_order(int order_floor, HardwareOrder order_type);
+Order user_get_order();
+
 
 /**
- * @brief add order struct into @p buttom_queue[]
- * @param[in] an const struct order @p new_order
+ * @brief checks if @p new_order is a legal order
  * 
- * @warning allocates a order pointer
+ * @param[in] new_order Order to be checked  
+ * @return 1 if the @p new_order is legal, 0 if not. 
  */
-void user_set_order(const Order new_order);
+int user_legal_order(Order new_order);
 
-/**
- * @brief Events that can occure in the different states in @c e_elevator_state
- */
-typedef enum{
-        stop_button_pressed,
-        floor_arrived,
-        obstruction_button_pressed,
-	execute_new_order,
-        calibrating_finished,
-}e_elevator_event;
+#endif
 
-
-/**
- * @brief Finding what signals the user are triggering
- * @warning It exists events that the user can not do himself, but this is calibrating conditions (don't care)
- * @return Returns the event that the user is affecting the system with
- */
-e_elevator_event user_read_event();
 

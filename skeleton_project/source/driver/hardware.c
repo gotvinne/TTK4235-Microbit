@@ -2,7 +2,7 @@
 #include "channels.h"
 #include "esm.h"
 #include "io.h"
-#include "user.h"
+#include "timer.h"
 
 #include <unistd.h>
 #include <stdlib.h>
@@ -46,29 +46,6 @@ static int hardware_order_type_bit(HardwareOrder order_type){
     return type_bit;
 }
 
-int hardware_init(){
-    if(!io_init()){
-        return 1;
-    }
-
-    for(int i = 0; i < HARDWARE_NUMBER_OF_FLOORS; i++){
-        if(i != 0){
-            hardware_command_order_light(HARDWARE_ORDER_DOWN, i, 0);
-        }
-
-        if(i != HARDWARE_NUMBER_OF_FLOORS - 1){
-            hardware_command_order_light(HARDWARE_ORDER_UP, i, 0);
-        }
-
-        hardware_command_order_light(HARDWARE_ORDER_INSIDE, i, 0);
-    }
-
-    hardware_command_stop_light(0);
-    hardware_command_door_open(0);
-    hardware_command_floor_indicator_on(0);
-
-    return 0;
-}
 
 void hardware_command_movement(HardwareMovement movement){
     switch(movement){
@@ -195,87 +172,72 @@ void hardware_command_order_light(int floor, HardwareOrder order_type, int on){
     }
 }
 
-
-void hardware_command_set_elevator_movement(int* p_queue){
-        HardwareMovement movement = HARDWARE_MOVEMENT_STOP;
-        if (current_floor < *p_queue){
-                movement = HARDWARE_MOVEMENT_UP;
-        }
-        else{
-                movement = HARDWARE_MOVEMENT_DOWN;
-        }
-	if (current_floor == *p_queue){
+void hardware_command_go_to(int queue_dest, int c_floor){
+    HardwareMovement movement;
+    if (queue_dest == -1){
+        return;
+    }
+    else if (c_floor < queue_dest){
+        movement = HARDWARE_MOVEMENT_UP;
+    }
+    else if(c_floor > queue_dest){
+        movement = HARDWARE_MOVEMENT_DOWN;
+    }
+	else{
 		movement = HARDWARE_MOVEMENT_STOP;
 	}
-        hardware_command_movement(movement);
+    hardware_command_movement(movement);
 }
 
-int hardware_command_door_open_3sec(){
+void hardware_command_door_open_3_sec(int c_floor){
         if(SENSOR_FLOOR1 || SENSOR_FLOOR2 || SENSOR_FLOOR3 || SENSOR_FLOOR4){
                 hardware_command_door_open(1);
-                sleep(3);
-                hardware_command_door_open(0);
-                return 0;
+                if(timer(c_floor)){
+                    hardware_command_door_open(0);
+                }    
         }
-        return -1;
 }
 
 
-void hardware_command_stop_button_pressed_actions(){
-        hardware_command_movement(HARDWARE_MOVEMENT_STOP);
-	hardware_command_stop_light(1);
-        hardware_command_open_door();
-}
-
-
-void hardware_clear_all_order_lights(){
-    HardwareOrder order_types[3] = {
-        HARDWARE_ORDER_UP,
-        HARDWARE_ORDER_INSIDE,
-        HARDWARE_ORDER_DOWN
-    };
-
-    for(int f = 0; f < HARDWARE_NUMBER_OF_FLOORS; f++){
-        for(int i = 0; i < 3; i++){
-            HardwareOrder type = order_types[i];
-            hardware_command_order_light(f, type, 0);
-        }
-    }
-}
-
-void hardware_set_all_lights(Order* p_button_queue, int size_of_p_button_queue){
-
-	HardwareOrder order_types[3] = {
-	        HARDWARE_ORDER_UP,
-	        HARDWARE_ORDER_INSIDE,
-	        HARDWARE_ORDER_DOWN
-	};
-	
-	for(j = 0; j < size_of_p_button_queue; j++){
-		for(int f = 0; f < HARDWARE_NUMBER_OF_FLOORS; f++){
-	        	for(int i = 0; i < 3; i++){
-	        		HardwareOrder type = order_types[i];
-				if(p_button_queue->order_type == type && p_button_queue->floor == f){
-	        			hardware_command_order_light(f, type, 1);
-				}
-				else{
-					hardware_command_order_light(f, type, 0);
-				}
-	        	}
-		}
-		p_button_queue++;
+HardwareMovement hardware_get_priority_movement(int c_floor, int destination){ //Skal denne vere her? 
+	if (c_floor < destination){
+		return HARDWARE_MOVEMENT_UP;
 	}
-	hardware_command_floor_indicator_on(current_floor);
+	else if (c_floor > destination){
+		return HARDWARE_MOVEMENT_DOWN;
+	}
+	return HARDWARE_MOVEMENT_STOP;
 }
-
 
 void hardware_calibrate(){
-        hardware_init();
-        int* first_floor;
-        *first_floor = 0;
-	while(current_floor != 0){
-        	hardware_command_set_elevator_movement(first_floor);
+	while(hardware_read_floor_sensor(0)==0){
+        	hardware_command_movement(HARDWARE_MOVEMENT_DOWN);
 	}
+    hardware_command_movement(HARDWARE_MOVEMENT_STOP);
 }
 
+
+int hardware_init(){
+    if(!io_init()){
+        return 1;
+    }
+
+    for(int i = 0; i < HARDWARE_NUMBER_OF_FLOORS; i++){
+        if(i != 0){
+            hardware_command_order_light(HARDWARE_ORDER_DOWN, i, 0);
+        }
+
+        if(i != HARDWARE_NUMBER_OF_FLOORS - 1){
+            hardware_command_order_light(HARDWARE_ORDER_UP, i, 0);
+        }
+
+        hardware_command_order_light(HARDWARE_ORDER_INSIDE, i, 0);
+    }
+
+    hardware_command_stop_light(0);
+    hardware_command_door_open(0);
+    hardware_command_floor_indicator_on(0);
+
+    return 0;
+}
 

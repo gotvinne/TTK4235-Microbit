@@ -130,36 +130,27 @@ void hardware_command_order_light(int floor, HardwareOrder order_type, int on);
  * in esm.h
  * 
  */
-void hardware_command_set_elevator_movement(int* p_queue);
+void hardware_command_go_to(int queue_dest, int c_floor);
 
 /**
  * @brief Open the door in three seconds if in defined floor.
  * @return Returns 0 if it opens. -1 if the door did not open.
  */
-int hardware_command_door_open_3_sec();
+void hardware_command_door_open_3_sec(int c_floor);
+
 
 /**
- * @brief Makes the elevator stop when the stop button is pressed.
- * Tries to open door if in defined floor.
- */
-void hardware_command_stop_button_pressed_actions();
-
-/**
- * @brief Turn off all order ligths. 
- */
-void hardware_clear_all_order_lights();
-
-/**
- * @brief Set all lights that should be on, depending on @p current_floor,
- * the button queue @p p_button_queue and the size of this queue @p size_of_p_button_queue
+ * @brief 
  * 
- * @param p_button_queue A pointer to an @p Order struct
- * @param size_of_p_button_queue An int representing the size of the p_button_queue array.
-*/
-void hardware_set_all_lights(Order* p_button_queue, int size_of_p_button_queue);
+ * @param c_floor 
+ * @param destination 
+ * @return HardwareMovement 
+ */
+HardwareMovement hardware_get_priority_movement(int c_floor, int destination); 
 
 /**
  * @brief Initializes the hardware and io and makes the elevator go to the first floor.
+ * Tar inn current floor
  */
 void hardware_calibrate();
 

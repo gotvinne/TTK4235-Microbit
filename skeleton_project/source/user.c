@@ -1,43 +1,37 @@
 #include "user.h"
 #include "hardware.h"
-#include "queue.h" 
-
-
-Order user_make_order(int floor, HardwareOrder type){
-	
-	Order new;
-	new.floor_destination = floor;
-	new.order_type = type; 
-
-	return new; 
-	/*
-	new_o->floor_destination = floor;
-	new_o->order_type = type;
-	*/
-}//skal teste denne funksjonen. 
-
-
-void user_set_order(const Order new_order){
-	int i;
-	for (i=0; i < BUTTON_QUEUE_LENGTH; i++){
-	if (buttom_queue[i].floor_destination == -1){
-	buttom_queue[i] = new_o;
-	}
-}
  
-e_elevator_event user_read_event(){
-        if(hardware_read_stop_signal()){
-                return stop_button_pressed;
+
+
+Order user_get_order(){
+	int floor = -1;
+	HardwareOrder o_type = HARDWARE_ORDER_INSIDE;
+	for(int f = 0; f < HARDWARE_NUMBER_OF_FLOORS; f++){
+        if(hardware_read_order(f, HARDWARE_ORDER_INSIDE)){
+                floor = f;
+				o_type = HARDWARE_ORDER_INSIDE;
         }
-        if(queue_floor_arrived()){
-                return floor_arrived;
-        }
-        if(hardware_read_obstruction_signal()){
-                return obstruction_button_pressed;
-        }
-        if(hardware_init() == 0){
-                return calibrating_finished;
-        }
-        return execute_new_order;
+	    else if(hardware_read_order(f, HARDWARE_ORDER_DOWN)){
+            	floor = f;
+                o_type = HARDWARE_ORDER_DOWN;
+	    }
+	    else if(hardware_read_order(f, HARDWARE_ORDER_UP)){
+                floor = f;
+				o_type = HARDWARE_ORDER_UP;
+	    }
+    }
+	Order new = {floor, o_type};
+	return new; 
 }
+
+
+int user_legal_order(Order new_order){
+	int floor = new_order.floor_destination;
+	HardwareOrder type = new_order.order_type;
+	if (floor >= 0 && floor <= 3 && (type == HARDWARE_ORDER_DOWN || type == HARDWARE_ORDER_UP || type == HARDWARE_ORDER_INSIDE)){
+		return 1; 
+	} 
+	return 0; 
+} 
+
 
