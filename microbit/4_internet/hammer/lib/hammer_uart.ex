@@ -35,7 +35,7 @@ defmodule Hammer.UART do
 
   def init(:ok) do
     {:ok, pid} = Circuits.UART.start_link()
-    Circuits.UART.open(pid, "ttyACM0", speed: 9600, active: true)
+    Circuits.UART.open(pid, "tty.usbmodem0007812823991", speed: 9600, active: true)
 
     state = %{
       uart: pid,

@@ -12,7 +12,7 @@ int main(){
     led_matrix_init();
     uart_init();
     accelerometer_init();
-    server_link_init("??????", &m_state);
+    server_link_init("8ee9c3", &m_state);//Geir Ola Tvinnereim represents. 
 
     while(1){
         m_state.button_a_active = button_a_pressed();
